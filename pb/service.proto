@@ -1,0 +1,22 @@
+// use protoc tool to generate service.pb.go
+// protoc --proto_path=pb --go_out=plugins=grpc:$GOPATH/src/pb service.proto
+
+syntax = "proto3";
+
+package pb;
+option go_package = "github.com/AFukun/distributed-kv-db/pb";
+
+message Request {
+  string Method = 1;
+  string key = 2;
+  int64 value = 3;
+}
+
+message Response {
+  string Status = 1;
+  int64 value = 2;
+}
+
+service DatabaseService {
+  rpc Query(Request) returns (Response) {}
+}
